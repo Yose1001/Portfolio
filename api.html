@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <title>My Portfolio</title>
+    <style>
+      body {
+    font-family: "Times New Roman", Georgia, Serif;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  h1,h2,h3,h4,h5,h6 {
+    font-family: "Playfair Display";
+    letter-spacing: 5px;
+  }
+  
+  .R {
+    font-size: 21px;
+  }
+  
+  .light-text {
+    opacity: 0.6;
+  }
+  
+  ul {
+    list-style-type: disc;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  
+  body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+  }
+  
+  .bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("/img/818969.jpg");
+    min-height: 75%;
+  }
+
+  button {
+    padding: 6px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+  }
+
+  .myCart2 {
+    width: 500px; 
+    height: 500px; 
+    display: block; 
+    box-sizing: border-box;
+  }
+
+.card {
+    max-width: 80%;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0px 22px 22px -20px rgba(0,0,0,0.3);
+  }
+
+.box {
+  padding: 16px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="w3-top">
+      <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px">
+        <a href="/index.html" class="w3-bar-item w3-button">HOME</a>
+        <div class="w3-right w3-hide-small">
+          <a href="index.html" class="w3-bar-item w3-button">indext</a>
+          <a href="java.html" class="w3-bar-item w3-button">java</a>
+          <a href="api.html" class="w3-bar-item w3-button">api</a>
+        </div>
+      </div>
+    </div>
+<div class="box">
+    <div class="w3-content w3-padding-64 w3-margin-top" style="max-width: 1564px">
+      <h1>Random Text</h1>
+      <div>
+        <p id="randomText"></p>
+        <button id="generateButton">Random Text / Image</button>
+      </div>
+      <script src="script.js"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const randomTextButton = document.getElementById('generateButton');
+        const randomTextElement = document.getElementById('randomText');
+      
+        function getRandomText() {
+          const apiUrl = 'https://baconipsum.com/api/?type=all-meat&paras=1';
+      
+          fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+              randomTextElement.textContent = data[0];
+            })
+            .catch(error => {
+              console.error('Error fetching random text:', error);
+            });
+        }
+      
+        getRandomText();
+      
+        randomTextButton.addEventListener('click', getRandomText);
+      });
+      </script>
+
+    <div>
+      <h1>Random img</h1>
+      <img id="randomImage" src="" alt="Random Image">
+      <br><br>
+      <hr>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      const randomImageButton = document.getElementById('generateButton');
+      const randomImageElement = document.getElementById('randomImage');
+
+      function getRandomImage() {
+        const apiUrl = 'https://picsum.photos/400/400';
+
+        const randomImageUrl = `${apiUrl}?${Math.random()}`;
+
+        randomImageElement.src = randomImageUrl;
+      }
+
+      getRandomImage();
+
+      randomImageButton.addEventListener('click', getRandomImage);
+    });
+    </script>
+
+      <div>
+        <h1>เก็บข้อมูล API</h1>
+        <form  method="POST" action="https://script.google.com/macros/s/AKfycby5rZeirF-TiyhDr5KmAhCITZZ_Jlj6dR9ciegPNBSXhrIb8yyTqRmcdOZDNWlvrQld/exec">
+          <input name="Date" type="date" placeholder="Date" required />
+          <input name="Email" type="email" placeholder="Email" required />
+          <input name="Name" type="text" placeholder="Name" required />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+      <hr>
+
+      <iframe
+        width="100%"
+        height="400"
+        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vScoEGlpeRMUSosVvJijSDObtN53VZ27KLqwmVoV6m7FUas_HfwNlXTfeUv2nD43-3CVCTxfxnrvkvJ/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false&amp;single=true&amp;widget=true&amp;headers=false"
+      ></iframe>
+      <hr/>
+
+      <div>
+        <h2>Nationalize API Demo</h2>
+        <form id="nameForm">
+          <label for="name">Enter your name:</label>
+          <input type="text" id="name" name="name" required />
+          <button type="button" onclick="fetchNationality()">Submit</button>
+        </form>
+        <div id="result"></div>
+      </div>
+      <hr/>
+
+      <div>
+        <h2>Coinbase API Demo</h2>
+        <div id="lastUpdateTime"></div>
+        <div id="prices"></div>
+        <hr />
+        <script>
+          function fetchPrices() {
+            var now = new Date();
+            var currentTime = now.toLocaleTimeString();
+
+            fetch("https://api.coinbase.com/v2/exchange-rates?currency=USDT")
+              .then((response) => response.json())
+              .then((data) => {
+                displayPrices(data);
+                displayLastUpdateTime(currentTime);
+              })
+              .catch((error) => {
+                console.error("Error fetching data:", error);
+                alert("Error fetching data. Please try again.");
+              });
+          }
+          function displayPrices(data) {
+            var pricesDiv = document.getElementById("prices");
+            var rates = data.data.rates;
+            var currencies = ["1INCH","AAVE","ABT","ACH","ACS", "ADA","AED","BTC","ETH",];
+            var pricesHtml = "<p>1 USDT can buy:</p><ul>";
+
+            currencies.forEach((currency) => {
+              if (rates[currency]) {
+                pricesHtml += `<li>${currency}: ${rates[currency]}</li>`;
+              } else {
+                pricesHtml += `<li>${currency}: N/A</li>`;
+              }
+          });
+
+            pricesHtml += "</ul>";
+            pricesDiv.innerHTML = pricesHtml;
+          }
+
+          function displayLastUpdateTime(currentTime) {
+            var updateTimeDiv = document.getElementById("lastUpdateTime");
+            updateTimeDiv.innerHTML = `<p>Last Update Time: ${currentTime}</p>`;
+          }
+
+          fetchPrices();
+          setInterval(fetchPrices, 3000);
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
